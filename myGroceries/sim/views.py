@@ -9,7 +9,9 @@ from google.auth.transport import requests # type:ignore
 
 @csrf_exempt
 def sign_in(request):
-    return render(request, 'sign_in.html')
+    return render(request, 'sign_in.html', context={
+        'GOOGLE_OAUTH_CLIENT_ID': os.environ.get('GOOGLE_OAUTH_CLIENT_ID')
+    })
 
 
 @csrf_exempt
@@ -20,11 +22,8 @@ def auth_receiver(request):
     token = request.POST['credential']
 
     try:
-        user_data = id_token.verify_oauth2_token(
-            token, requests.Request(), os.environ['GOOGLE_OAUTH_CLIENT_ID']
-        )
+        user_data = id_token.verify_oauth2_token(token, requests.Request(), os.environ['GOOGLE_OAUTH_CLIENT_ID'], clock_skew_in_seconds=10)
     except ValueError:
-        print("Inside Here")
         return HttpResponse(status=403)
 
     # In a real app, I'd also save any new user here to the database.
