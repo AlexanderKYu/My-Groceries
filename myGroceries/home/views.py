@@ -8,6 +8,9 @@ def home(request):
         if not User.objects.filter(email=userEmail):
             user = User(fname = userFname, email = userEmail)
             user.save()
-        return render(request, 'home.html')
+        userId = User.objects.filter(email=userEmail).values('id')[0]['id']
+        context = {}
+        context['userId'] = userId
+        return render(request, 'home.html', context)
     else:
         return redirect('sim/')

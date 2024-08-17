@@ -20,7 +20,9 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <p>Welcome, {{ request.session.user_data.given_name }}</p>
+        {% block includes %}    
+        <p>Welcome, {{ request.session.user_data.given_name }}. Your user identification is: {{ userId }}</p>
+        {% endblock includes %}
     </div>
 </body>
 </html>
