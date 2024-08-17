@@ -19,7 +19,7 @@ load_dotenv()
 
 GOOGLE_OAUTH_CLIENT_ID = os.environ.get('GOOGLE_OAUTH_CLIENT_ID')
 if not GOOGLE_OAUTH_CLIENT_ID:
-    raise ValueError('GOOGLE_OAUTH_CLIENT_ID is missing.')
+    raise ValueError('GOOGLE_OAUTH_CLIENT_ID is missing. Please copy envExample.txt and create a .env file under the same directory with the token populated.')
 
 # We need these lines below to allow the Google sign in popup to work.
 SECURE_REFERRER_POLICY = 'no-referrer-when-downgrade'
