@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sim',
     'home',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
