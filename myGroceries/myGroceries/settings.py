@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'sim',
     'home',
     'user',
+    'family',
     'bootstrap5',
 ]
 
