@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'home',
     'user',
     'family',
+    'groceries',
     'bootstrap5',
 ]
 
