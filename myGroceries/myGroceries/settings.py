@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'user',
     'family',
     'groceries',
+    'inventory',
     'bootstrap5',
 ]
 
@@ -73,7 +74,7 @@ ROOT_URLCONF = 'myGroceries.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'myGroceries/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

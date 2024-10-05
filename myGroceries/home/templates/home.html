@@ -1,192 +1,168 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Groceries</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content%}
+    {% block includes %}    
+    <p>Welcome, {{ request.session.user_data.given_name }}. Your user identification is: {{ userId }}</p>
+    {% endblock includes %}
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">My Groceries</span>
-            <div class="navbar-nav">
-                <a class="nav-link active" href="/">Home</a>
-                <a class="nav-link" href="family/">Family</a>
-                <a class="nav-link" href="sim/sign-out">Sign out</a>
-            </div>
-        </div>
-    </nav>
-    <div class="container-fluid">
-        {% block includes %}    
-        <p>Welcome, {{ request.session.user_data.given_name }}. Your user identification is: {{ userId }}</p>
-        {% endblock includes %}
-    </div>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1">Items</span>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search">
-                    <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Filters
-                    </button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Item Tags</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <span class="navbar-brand mb-0 h1">Items</span>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search">
+                <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Filters
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Item Tags</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="fruit" id="fruit">
+                                <label class="form-check-label" for="fruit">
+                                    Fruit
+                                </label>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="fruit" id="fruit">
-                                    <label class="form-check-label" for="fruit">
-                                        Fruit
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="vegetable" id="vegetable">
-                                    <label class="form-check-label" for="vegetable">
-                                        Vegetable
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="cannedGoods" id="cannedGoods">
-                                    <label class="form-check-label" for="cannedGoods">
-                                        Canned Goods
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="dairy" id="dairy">
-                                    <label class="form-check-label" for="dairy">
-                                        Dairy
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="meat" id="meat">
-                                    <label class="form-check-label" for="meat">
-                                        Meat
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="seafood" id="seafood">
-                                    <label class="form-check-label" for="seafood">
-                                        Seafood
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="deli" id="deli">
-                                    <label class="form-check-label" for="deli">
-                                        Deli
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="condiment" id="condiment">
-                                    <label class="form-check-label" for="condiment">
-                                        Condiment
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="snack" id="snack">
-                                    <label class="form-check-label" for="snack">
-                                        Snack
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="bakery" id="v">
-                                    <label class="form-check-label" for="bakery">
-                                        Bakery
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="beverage" id="beverage">
-                                    <label class="form-check-label" for="beverage">
-                                        Beverage
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="carbohydrate" id="carbohydrate">
-                                    <label class="form-check-label" for="carbohydrate">
-                                        Carbohydrate
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="vegetable" id="frozen">
-                                    <label class="form-check-label" for="frozen">
-                                        Frozen
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="personal" id="personal">
-                                    <label class="form-check-label" for="personal">
-                                        Personal
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="health" id="health">
-                                    <label class="form-check-label" for="health">
-                                        Health
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="clean" id="clean">
-                                    <label class="form-check-label" for="clean">
-                                        Clean
-                                    </label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="vegetable" id="vegetable">
+                                <label class="form-check-label" for="vegetable">
+                                    Vegetable
+                                </label>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-outline-success">Apply Filters</button>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="cannedGoods" id="cannedGoods">
+                                <label class="form-check-label" for="cannedGoods">
+                                    Canned Goods
+                                </label>
                             </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="dairy" id="dairy">
+                                <label class="form-check-label" for="dairy">
+                                    Dairy
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="meat" id="meat">
+                                <label class="form-check-label" for="meat">
+                                    Meat
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="seafood" id="seafood">
+                                <label class="form-check-label" for="seafood">
+                                    Seafood
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="deli" id="deli">
+                                <label class="form-check-label" for="deli">
+                                    Deli
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="condiment" id="condiment">
+                                <label class="form-check-label" for="condiment">
+                                    Condiment
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="snack" id="snack">
+                                <label class="form-check-label" for="snack">
+                                    Snack
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="bakery" id="v">
+                                <label class="form-check-label" for="bakery">
+                                    Bakery
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="beverage" id="beverage">
+                                <label class="form-check-label" for="beverage">
+                                    Beverage
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="carbohydrate" id="carbohydrate">
+                                <label class="form-check-label" for="carbohydrate">
+                                    Carbohydrate
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="vegetable" id="frozen">
+                                <label class="form-check-label" for="frozen">
+                                    Frozen
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="personal" id="personal">
+                                <label class="form-check-label" for="personal">
+                                    Personal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="health" id="health">
+                                <label class="form-check-label" for="health">
+                                    Health
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="clean" id="clean">
+                                <label class="form-check-label" for="clean">
+                                    Clean
+                                </label>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-outline-success">Apply Filters</button>
+                        </div>
+                        </div>
                     </div>
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Item</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Unit</th>
-                    <th scope="col">Tags</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Soap</th>
-                    <td>2</td>
-                    <td>L</td>
-                    <td>tagid</td>
-                </tr>
-            </tbody>
-        </table>
-        <nav>
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Soap</th>
+                <td>2</td>
+                <td>L</td>
+                <td>tagid</td>
+            </tr>
+        </tbody>
+    </table>
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
                 </li>
-            </ul>
-        </nav>
-    </div>
-    
-</body>
-</html>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

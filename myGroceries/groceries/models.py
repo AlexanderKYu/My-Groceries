@@ -31,8 +31,8 @@ class Groceries(models.Model):
         ("mL", "MilliLitre"),
         ("gal", "Gallon")
     )
-    item = models.CharField(max_length=255)
+    item = models.CharField(default=None, max_length=255)
     memberId = models.ForeignKey(User, on_delete=models.CASCADE)
-    quant = models.IntegerField()
-    metric = models.CharField(max_length=10, choices=metricEnum)
+    quant = models.IntegerField(default=None)
+    metric = models.CharField(default=None, max_length=10, choices=metricEnum)
     tagId = models.ForeignKey(Tags, on_delete=models.CASCADE)
