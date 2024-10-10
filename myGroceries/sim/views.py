@@ -34,6 +34,7 @@ def auth_receiver(request):
 
 
 def sign_out(request):
-    del request.session['user_data']
+    if 'user_data' in request.session:
+        del request.session['user_data']
     return redirect('sign_in')
 

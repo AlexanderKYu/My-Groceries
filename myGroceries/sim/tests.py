@@ -13,6 +13,11 @@ class signInModuleAuthorized(TestCase):
         
         self.assertEqual(response.status_code, 200)
     
+    def test_sign_out(self):
+        response = self.client.get("/sim/sign-out")
+
+        self.assertRedirects(response, expected_url="/sim/", status_code=302)
+    
 
 class signInModuleUnAuthorzed(TestCase):
     def setUp(self):
@@ -20,6 +25,11 @@ class signInModuleUnAuthorzed(TestCase):
     
     def test_OAuth_redirect(self):
         response = self.client.get("/")
+
+        self.assertRedirects(response, expected_url="/sim/", status_code=302)
+    
+    def test_unauthorized_sign_out(self):
+        response = self.client.get("/sim/sign-out")
 
         self.assertRedirects(response, expected_url="/sim/", status_code=302)
 
