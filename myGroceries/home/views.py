@@ -18,4 +18,4 @@ def home(request):
 
         return render(request, 'home.html', context)
     else:
-        return redirect('sim/')
+        return redirect('/sim/')

@@ -16,4 +16,4 @@ def family(request):
         context['familyCode'] = familyCode
         return render(request, 'family.html', context)
     else:
-        return redirect('sim/')
+        return redirect('/sim/')
