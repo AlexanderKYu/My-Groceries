@@ -7,4 +7,4 @@ def inventory(request):
         context = {}
         return render(request, 'inventory.html', context)
     else:
-        return redirect('sim/')
+        return redirect('/sim/')
